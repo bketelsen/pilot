@@ -1,4 +1,4 @@
-# install azcli on any debian family distro
+# install docker on any ubuntu distro
 ubuntu_docker() {
     header "Install Docker" "This command will install docker and configure your user permissions"
 
