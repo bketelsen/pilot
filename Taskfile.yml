@@ -1,0 +1,18 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  build:
+    cmds:
+      - docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/app" dannyben/bashly generate --upgrade
+      - docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/app" dannyben/bashly render :mandoc man
+    silent: true
+  release:
+    cmds:
+      - docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/app" dannyben/bashly generate --production
+      - docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/app" dannyben/bashly render :mandoc man
+    silent: true

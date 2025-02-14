@@ -1,0 +1,97 @@
+name: pilot
+help: CLI Helper for Intune
+version: 0.0.1
+
+
+commands:
+- name: intune
+  help: Install Intune prerequisites
+  filters:
+  - ubuntu2404
+
+  flags:
+  - long: --verbose
+    short: -v
+    help: Show more output
+
+  examples:
+  - pilot intune
+  - pilot intune --verbose
+
+- name: docker
+  help: Install Docker
+  filters:
+  - ubuntu
+
+  flags:
+  - long: --verbose
+    short: -v
+    help: Show more output
+
+  examples:
+  - pilot docker
+  - pilot docker --verbose
+
+- name: test
+  help: |-
+    Test Command
+    
+    test command2
+
+  flags:
+  - long: --verbose
+    short: -v
+    help: Show more output
+
+  examples:
+  - pilot test
+  - pilot test --verbose
+
+- name: incus
+  help: Install Incus
+  filters:
+  - ubuntu2404
+
+  flags:
+  - long: --verbose
+    short: -v
+    help: Show more output
+
+  examples:
+  - pilot incus
+  - pilot incus --verbose
+
+- name: azcli
+  help: Install Azure CLI
+  filters:
+  - ubuntu2404
+
+  flags:
+  - long: --verbose
+    short: -v
+    help: Show more output
+
+  examples:
+  - pilot azcli
+  - pilot azcli --verbose
+
+- name: enhancedmode
+  help: Install and configure XRDP for enhanced mode
+  filters:
+  - ubuntu2404
+
+  flags:
+  - long: --verbose
+    short: -v
+    help: Show more output
+
+  examples:
+  - pilot enhancedmode
+  - pilot enhancedmode --verbose
+
+x_mandoc_authors: |-
+  Brian Ketelsen <bketelsen@gmail.com>
+x_mandoc_footer: |-
+  # ISSUE TRACKER
+
+  Report issues at <https://github.com/bketelsen/pilotq>
