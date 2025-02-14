@@ -1,3 +1,4 @@
+# install azcli on any debian family distro
 debian_azcli() {
     header "Install Azure CLI" "This command will install the Azure CLI (az)."
 
