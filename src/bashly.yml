@@ -64,8 +64,6 @@ commands:
 
 - name: azcli
   help: Install Azure CLI
-  filters:
-  - ubuntu2404
 
   flags:
   - long: --verbose
