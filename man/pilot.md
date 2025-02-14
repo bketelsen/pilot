@@ -31,11 +31,6 @@ pilot docker
 
 Install Docker
 
-pilot test
---------------------------------------------------
-
-Test Command
-
 pilot incus
 --------------------------------------------------
 
@@ -55,7 +50,7 @@ Install and configure XRDP for enhanced mode
 SEE ALSO
 ==================================================
 
-**pilot-intune**(1), **pilot-docker**(1), **pilot-test**(1), **pilot-incus**(1), **pilot-azcli**(1), **pilot-enhancedmode**(1)
+**pilot-intune**(1), **pilot-docker**(1), **pilot-incus**(1), **pilot-azcli**(1), **pilot-enhancedmode**(1)
 
 # ISSUE TRACKER
 

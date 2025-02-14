@@ -28,7 +28,6 @@ pilot_usage() {
   printf "%s\n" "$(bold "Commands:")"
   printf "  %s   Install Intune prerequisites\n" "$(green "intune")      "
   printf "  %s   Install Docker\n" "$(green "docker")      "
-  printf "  %s   Test Command\n" "$(green "test")        "
   printf "  %s   Install Incus\n" "$(green "incus")       "
   printf "  %s   Install Azure CLI\n" "$(green "azcli")       "
   printf "  %s   Install and configure XRDP for enhanced mode\n" "$(green "enhancedmode")"
@@ -317,6 +316,7 @@ inspect_args() {
 
 # :command.user_lib
 # src/lib/azcli.sh
+# install azcli on any debian family distro
 debian_azcli() {
     header "Install Azure CLI" "This command will install the Azure CLI (az)."
 
@@ -463,6 +463,7 @@ general() {
     echo "$1_$2"
 }
 
+# looks for ubuntu_24.04_$1, ubuntu_$1, debian_$1, returning the first it finds
 install_function() {
 
     dv=$(distro_version $1)

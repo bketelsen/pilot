@@ -33,9 +33,10 @@ commands:
   - pilot docker --verbose
 
 - name: test
+  private: true
   help: |-
     Test Command
-    
+
     test command2
 
   flags:
