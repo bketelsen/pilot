@@ -37,6 +37,7 @@ general() {
     echo "$1_$2"
 }
 
+# looks for ubuntu_24.04_$1, ubuntu_$1, debian_$1, returning the first it finds
 install_function() {
 
     dv=$(distro_version $1)
