@@ -316,6 +316,20 @@ inspect_args() {
 }
 
 # :command.user_lib
+# src/lib/azcli.sh
+debian_azcli() {
+    header "Install Azure CLI" "This command will install the Azure CLI (az)."
+
+    confirm_task "Installing AzureCLI"
+
+    start install azcli
+    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    finish install azcli
+
+    footer "Azure CLI Installed"
+
+}
+
 # src/lib/colors.sh
 
 enable_auto_colors() {
@@ -410,7 +424,6 @@ fi
 }
 
 # src/lib/os.sh
-
 filter_ubuntu() {
     . /etc/os-release
     if [[ "$ID" != "ubuntu" ]]; then
@@ -433,6 +446,92 @@ filter_ubuntu2404() {
         echo "You have ${NAME} version ${VERSION_ID}"
     fi
 
+}
+
+# returns true if $1 exists as a declared function
+fn_exists() { declare -F "$1" >/dev/null; }
+
+distro_version() {
+    echo "${ID}_${VERSION_ID}_$1"
+}
+
+distro() {
+    echo "${ID}_$1"
+}
+
+general() {
+    echo "$1_$2"
+}
+
+install_function() {
+
+    dv=$(distro_version $1)
+
+    fn_exists $dv && echo $dv && return
+
+    dis=$(distro $1)
+    fn_exists $dis && echo $dis && return
+
+    for i in $(echo $ID_LIKE | xargs); do
+        generalname=$(general $i $1)
+        fn_exists $generalname && echo $generalname && return
+    done
+
+    return 0
+
+}
+
+install() {
+    myscript=$(install_function $1)
+
+    if [[ ! -z $myscript ]]; then
+        eval $myscript
+    else
+        echo "No installation script found for script $(green $1) on ${ID}/${VERSION_ID}, ${ID}, or other candidates (${ID_LIKE})"
+    fi
+
+}
+
+# src/lib/test_install_script.sh
+test_ubuntu() {
+        echo "Ubuntu Test"
+}
+
+test_ubuntu24.04() {
+        echo "Ubuntu 24.04 Test"
+}
+
+# "full" for only centos 10
+centos_10_full() {
+        header "Full: Centos 10" "This is the 'full' install script for centos 10"
+}
+
+# "full" for any centos
+centos_full() {
+        header "Full: Centos" "This is the 'full' install script for centos"
+}
+# "full" for any
+fedora_full() {
+        header "Full: Fedora" "This is the 'full' install script for fedora"
+}
+# "full" for any rhel
+rhel_full() {
+        header "Full: rhel" "This is the 'full' install script for rhel"
+}
+
+# "distro" for any centos
+centos_distro() {
+        header "Distro: centos" "This is the 'distro' install script for centos"
+}
+
+# "generic" for fedora
+fedora_generic() {
+        header "Generic: fedora" "This is the 'generic' install script for fedora"
+}
+
+# "generic" for fedora
+rhel_generic() {
+        header "Generic: rhel" "This is the 'generic' install script for rhel"
 }
 
 # :command.command_functions
@@ -570,8 +669,10 @@ pilot_test_command() {
 
   # src/test_command.sh
 
-  inspect_args
-
+  install full
+  install distro
+  install generic
+  install nope
 }
 
 # :command.function
@@ -613,16 +714,7 @@ footer "Incus Installed" "Run 'incus admin init' to initialize your incus server
 pilot_azcli_command() {
 
   # src/azcli_command.sh
-  header "Install Azure CLI" "This command will install the Azure CLI (az)."
-
-  confirm_task "Installing AzureCLI"
-
-  start install azcli
-  curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-  finish install azcli
-
-  footer "Azure CLI Installed"
-
+  install azcli
 }
 
 # :command.function
