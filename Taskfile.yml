@@ -13,6 +13,6 @@ tasks:
     silent: true
   release:
     cmds:
-      - docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/app" dannyben/bashly generate --production
+      - docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/app" dannyben/bashly generate -e production
       - docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/app" dannyben/bashly render :mandoc man
     silent: true
